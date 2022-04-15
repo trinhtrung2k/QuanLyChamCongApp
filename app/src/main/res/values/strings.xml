@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">QuanLyChamCong</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_worker">Công nhân</string>
+    <string name="menu_timekeeping">Chấm công</string>
+    <string name="menu_timekeepingDetail">Chi tiết chấm công</string>
+    <string name="menu_product">Sản phẩm</string>
+    <string name="menu_salary">Lương</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_change_password">Change Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <array name="data">
+        <item>Nokia</item>
+        <item>SamSung</item>
+        <item>Iphone</item>
+        <item>Iphone1</item>
+        <item>Iphon23e</item>
+        <item>Iphonade</item>
+    </array>
+</resources>

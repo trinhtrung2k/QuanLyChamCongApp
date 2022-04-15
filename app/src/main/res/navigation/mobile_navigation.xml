@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_worker">
+
+       <fragment
+        android:id="@+id/nav_worker"
+        android:name="com.trinhtrung.quanlychamcong.WorkerFragment"
+        android:label="@string/menu_worker"
+        tools:layout="@layout/fragment_worker" />
+    <fragment
+        android:id="@+id/nav_product"
+        android:name="com.trinhtrung.quanlychamcong.ProductFragment"
+        android:label="@string/menu_product"
+        tools:layout="@layout/fragment_product" />
+    <fragment
+        android:id="@+id/nav_timekeeping"
+        android:name="com.trinhtrung.quanlychamcong.TimekeepingFragment"
+        android:label="@string/menu_timekeeping"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_timekeepingDetail"
+        android:name="com.trinhtrung.quanlychamcong.TimekeepingDetailFragment"
+        android:label="@string/menu_timekeepingDetail"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_salary"
+        android:name="com.trinhtrung.quanlychamcong.SalaryFragment"
+        android:label="@string/menu_salary"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.trinhtrung.quanlychamcong.LogoutFragment"
+        android:label="@string/menu_logout"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_change_password"
+        android:name="com.trinhtrung.quanlychamcong.ChangePasswordFragment"
+        android:label="@string/menu_change_password"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.trinhtrung.quanlychamcong.ui.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_slideshow" />
+</navigation>

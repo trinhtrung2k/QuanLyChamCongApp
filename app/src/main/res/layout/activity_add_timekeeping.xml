@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.AddTimekeepingActivity"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="7dp"
+    app:cardElevation="5dp"
+    android:background="@drawable/edittext_background"
+    android:orientation="vertical"
+    android:id="@+id/addTimekeeping">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_addTkp"
+        android:background="@color/purple_700"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Chấm công cho công nhân"
+        app:titleTextColor="#D3AC1B"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#B3FB9F"
+        android:padding="8dp"
+        android:layout_gravity="center"
+
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Mã chấm công:"
+
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/alice" />
+
+
+            <EditText
+                android:inputType="text|textCapCharacters"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:id="@+id/add_macc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:fontFamily="@font/alice"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:text="Ngày chấm công:"
+                android:textSize="16sp"
+                android:fontFamily="@font/alice" />
+
+            <TextView
+                android:layout_marginStart="13dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:id="@+id/add_ngaycc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:textSize="16sp"
+                android:fontFamily="@font/alice" />
+            <ImageView
+                android:id="@+id/choose_day"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_today_24"></ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Mã công nhân:"
+                android:textSize="16sp"
+                android:fontFamily="@font/alice" />
+<!--
+            <EditText
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:id="@+id/add_macn1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:textSize="16sp"
+                android:fontFamily="@font/alice" />-->
+
+          <!--  <Spinner
+                android:layout_gravity="bottom"
+                android:id="@+id/add_cc_macn"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/data"
+                />-->
+
+            <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                android:id="@+id/spinnerTkp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+               app:smsp_isSearchable="true"
+                app:smsp_enableFloatingLabel="false"
+                app:smsp_floatingLabelColor="#1976D2"
+                app:smsp_hint="Mã công nhân"
+                app:smsp_hintColor="#388E3C"
+                app:smsp_searchHeaderText="Mã công nhân"
+                app:smsp_itemColor="#512DA8"
+                app:smsp_itemListColor="#7C4DFF"
+                app:smsp_itemListHintBackgroundColor="#808080"
+                app:smsp_itemListHintColor="#FFFFFF"
+                app:smsp_selectedItemListColor="#FF5252" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_message_cc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vui lòng nhập đầy đủ thông tin"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:visibility="gone"
+
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btn_add_cc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Thêm"
+                android:backgroundTint="@color/black"
+               />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

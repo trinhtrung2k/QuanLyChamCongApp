@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_worker"
+            android:icon="@drawable/worker_icon"
+            android:title="@string/menu_worker"
+            />
+        <item
+            android:id="@+id/nav_product"
+            android:icon="@drawable/product"
+            android:title="@string/menu_product" />
+        <item
+            android:id="@+id/nav_timekeeping"
+            android:icon="@drawable/timekeeping"
+            android:title="@string/menu_timekeeping" />
+        <item
+            android:id="@+id/nav_timekeepingDetail"
+            android:icon="@drawable/note"
+            android:title="@string/menu_timekeepingDetail" />
+        <item
+            android:id="@+id/nav_salary"
+            android:icon="@drawable/note"
+            android:title="@string/menu_salary" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/account"
+            android:title="@string/menu_profile"/>
+
+        <item
+            android:id="@+id/nav_change_password"
+            android:icon="@drawable/change_password"
+            android:title="@string/menu_change_password" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_baseline_login_24"
+            android:title="@string/menu_logout"/>
+    </group>
+</menu>
