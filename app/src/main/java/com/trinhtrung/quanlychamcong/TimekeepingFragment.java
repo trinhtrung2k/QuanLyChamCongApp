@@ -57,6 +57,7 @@ public class TimekeepingFragment extends Fragment {
     private List<TimekeepingModel> timekeepingModelList;
     private TimekeepingAdapter timekeepingAdapter;
     private RecyclerView recyclerView;
+    private  EditText edt_search_cc;
     ScrollView scrollView_cc;
     ProgressBar progressBar_cc;
     private ImageView img_add_cc;
@@ -74,29 +75,35 @@ public class TimekeepingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_timekeeping, container, false);
         db = new QLChamCongDataBase(getActivity());
-        img_add_cc= view.findViewById(R.id.img_add_cc);
 
-        scrollView_cc = view.findViewById(R.id.scroll_view_cc);
-        progressBar_cc = view.findViewById(R.id.progressbar_cc);
+        initUi(view);
+        setEvent();
+
+
+        return view;
+    }
+
+    private void setEvent() {
+
         progressBar_cc.setVisibility(View.VISIBLE);
         scrollView_cc.setVisibility(View.GONE);
-        recyclerView = view.findViewById(R.id.timekeeping_rec);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         timekeepingModelList = new ArrayList<>();
         timekeepingAdapter = new TimekeepingAdapter(TimekeepingFragment.this,timekeepingModelList);
         recyclerView.setAdapter(timekeepingAdapter);
 
-        getAllTimekeeing();
+
         img_add_cc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(getActivity(), AddTimekeepingActivity.class);
                 startActivity(intent);
-               // startActivityForResult(intent, REQUEST_CODE_TKP);
+                // startActivityForResult(intent, REQUEST_CODE_TKP);
             }
         });
-        EditText edt_search_cc = view.findViewById(R.id.edt_search_cc);
+
         edt_search_cc.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -114,13 +121,17 @@ public class TimekeepingFragment extends Fragment {
 
             }
         });
-
-       /* if (checkInsertCC == 1){
-            ReadJson();
-        }
-*/
-        return view;
+        getAllTimekeeing();
     }
+
+    private void initUi(View view) {
+        img_add_cc= view.findViewById(R.id.img_add_cc);
+        scrollView_cc = view.findViewById(R.id.scroll_view_cc);
+        progressBar_cc = view.findViewById(R.id.progressbar_cc);
+        recyclerView = view.findViewById(R.id.timekeeping_rec);
+         edt_search_cc = view.findViewById(R.id.edt_search_cc);
+    }
+
     private void filter(String text) {
         ArrayList<TimekeepingModel> timekeepingModels = new ArrayList<>();
         for (TimekeepingModel item:timekeepingModelList)

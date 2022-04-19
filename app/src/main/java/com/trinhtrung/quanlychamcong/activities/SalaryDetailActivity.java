@@ -73,12 +73,9 @@ public class SalaryDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_salary_detail);
-        Intent intent = getIntent();
-        SalaryModel salaryModel = (SalaryModel) intent.getSerializableExtra("dataSalary");
+
         initUi();
-
-
-        setData(salaryModel);
+        setData();
         setEvent();
     }
 
@@ -102,7 +99,9 @@ public class SalaryDetailActivity extends AppCompatActivity {
 
     }
 
-    private void setData(SalaryModel salaryModel) {
+    private void setData() {
+        Intent intent = getIntent();
+        SalaryModel salaryModel = (SalaryModel) intent.getSerializableExtra("dataSalary");
         txtMacc.setText(salaryModel.getMaCC());
         txtNgayCC.setText(salaryModel.getNgayCC());
         txtMasp.setText(salaryModel.getMaSP());
@@ -143,30 +142,8 @@ public class SalaryDetailActivity extends AppCompatActivity {
 
     }
 
-
-    private void getSalary() {
-        Cursor dataSalary = db.GetData("SELECT CHAMCONG.MACC, CHAMCONG.NGAYCC, SANPHAM.MASP, SANPHAM.TENSP, CT_CHAMCONG.SOTP, CT_CHAMCONG.SOPP, SANPHAM.DONGIA " +
-                "FROM CHAMCONG INNER JOIN CT_CHAMCONG ON CT_CHAMCONG.MACC = CHAMCONG.MACC INNER JOIN SANPHAM ON CT_CHAMCONG.MASP = SANPHAM.MASP  ORDER BY CHAMCONG.MACC ASC");
-        salaryModelList.clear();
-        while (dataSalary.moveToNext()){
-            String macc = dataSalary.getString(0);
-            String ngaycc = dataSalary.getString(1);
-            String masp = dataSalary.getString(2);
-            String tensp = dataSalary.getString(3);
-            int sotp = dataSalary.getInt(4);
-            int sopp = dataSalary.getInt(5);
-            int dongia = dataSalary.getInt(6);
-            salaryModelList.add(new SalaryModel(macc,ngaycc,masp,tensp,sotp,sopp,dongia));
-        }
-
-
-//        salaryAdapter.notifyDataSetChanged();
-//        progressBar_salary.setVisibility(View.GONE);
-//        scrollView_salary.setVisibility(View.VISIBLE);
-    }
     private void createPdf(String maCC, String ngayCC, String maSP, String tenSP,
                            String soTP, String soPP, String tienCong, String thanhTien,String tenFile) throws FileNotFoundException {
-        // progressDialog.dismiss();
         String pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
 
         File file = new File(pdfPath, tenFile + ".pdf");
@@ -184,21 +161,12 @@ public class SalaryDetailActivity extends AppCompatActivity {
         ImageData imageData = ImageDataFactory.create(bitmapData);
         Image image = new Image(imageData);
 
-
         Paragraph reportSalary = new Paragraph("Report Salary").setBold().setFontSize(24)
                 .setTextAlignment(TextAlignment.CENTER);
-
-
-        // FontProgram fontProgram = null;
         PdfFont font = null;
-        // FontProgram fontProgram = null;
 
         try {
-            //font = PdfFontFactory.createFont(StandardFonts.COURIER,"Cp1258");
-            //  font = PdfFontFactory.createFont("D:\\BuilderAppAndroid\\QuanLyChamCong\\fonts\\vuTimes.ttf", "Cp1256", true);
-            //   fontProgram = FontProgramFactory.createFont( );
 
-            //  fontProgram = FontProgramFactory.createFont(vuArial);
             font = PdfFontFactory.createFont("assets/fonts/vuArial.ttf", PdfEncodings.IDENTITY_H, true);
 
 

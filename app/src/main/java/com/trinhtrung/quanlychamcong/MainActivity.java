@@ -25,15 +25,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.trinhtrung.quanlychamcong.databinding.ActivityMainBinding;
 import com.trinhtrung.quanlychamcong.models.UserModel;
+import com.trinhtrung.quanlychamcong.ui.profile.ProfileFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private FirebaseDatabase db;
     private FirebaseAuth auth;
+    private TextView headerName;
+    private TextView headerEmail;
+    private CircleImageView headerImg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,11 +71,16 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
-
         View headerView = navigationView.getHeaderView(0);
-        TextView headerName = headerView.findViewById(R.id.nav_header_name);
-        TextView headerEmail = headerView.findViewById(R.id.nav_header_email);
-        CircleImageView headerImg = headerView.findViewById(R.id.nav_header_img);
+        headerName = headerView.findViewById(R.id.nav_header_name);
+      headerEmail = headerView.findViewById(R.id.nav_header_email);
+      headerImg = headerView.findViewById(R.id.nav_header_img);
+        setEventHeader();
+
+
+    }
+
+    public void setEventHeader() {
 
 
         db.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
@@ -79,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         UserModel userModel = snapshot.getValue(UserModel.class);
 
-                            headerName.setText(userModel.getName());
-                            headerEmail.setText(userModel.getEmail());
+                        headerName.setText(userModel.getName());
+                        headerEmail.setText(userModel.getEmail());
 
 
                         Glide.with(MainActivity.this).load(userModel.getProfileImg()).into(headerImg);
@@ -92,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,4 +124,13 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setEventHeader();
+
+    }
+
+
 }

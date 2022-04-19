@@ -40,6 +40,7 @@ public class ProductFragment extends Fragment {
     ProgressBar progressBar_sp;
     private ImageView img_add_sp;
     private QLChamCongDataBase db ;
+    private   EditText edt_search_product;
     private static final int REQUEST_CODE_PRODUCT = 2;
 
 
@@ -56,17 +57,21 @@ public class ProductFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_product, container, false);
         db = new QLChamCongDataBase(getActivity());
-        img_add_sp= view.findViewById(R.id.img_add_sp);
+        initUi(view);
+        setEvent();
+
+        return view;
+    }
+
+    private void setEvent() {
         img_add_sp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), AddProductActivity.class);
-//               startActivityForResult(intent, REQUEST_CODE_PRODUCT);
-               startActivity(new Intent(getActivity(), AddProductActivity.class));
+                startActivity(new Intent(getActivity(), AddProductActivity.class));
             }
         });
 
-        EditText edt_search_product = view.findViewById(R.id.edt_search_product);
+
         edt_search_product.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -84,11 +89,10 @@ public class ProductFragment extends Fragment {
 
             }
         });
-        scrollView_sp = view.findViewById(R.id.scroll_view_sp);
-        progressBar_sp = view.findViewById(R.id.progressbar_sp);
+
         progressBar_sp.setVisibility(View.VISIBLE);
         scrollView_sp.setVisibility(View.GONE);
-        recyclerView = view.findViewById(R.id.product_rec);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         productModelList = new ArrayList<>();
         productAdapter = new ProductAdapter(ProductFragment.this,productModelList);
@@ -96,8 +100,14 @@ public class ProductFragment extends Fragment {
 
         getAllProduct();
 
+    }
 
-        return view;
+    private void initUi(View view) {
+        img_add_sp= view.findViewById(R.id.img_add_sp);
+         edt_search_product = view.findViewById(R.id.edt_search_product);
+        scrollView_sp = view.findViewById(R.id.scroll_view_sp);
+        progressBar_sp = view.findViewById(R.id.progressbar_sp);
+        recyclerView = view.findViewById(R.id.product_rec);
     }
 
 
@@ -132,28 +142,6 @@ public class ProductFragment extends Fragment {
     }
 
 
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == REQUEST_CODE_PRODUCT){
-//            if (resultCode == Activity.RESULT_OK){
-//
-//                final String result = data.getStringExtra(AddProductActivity.EXTRA_DATA);
-//                if (result.equals("addSanPham")){
-//
-//                    getAllProduct();
-//                }
-//                Toast.makeText(getContext(), "check: " + result, Toast.LENGTH_LONG).show();
-//               // productAdapter.notifyDataSetChanged();
-//            }
-//        }else if (requestCode == 3){
-//            if (requestCode == Activity.RESULT_OK){
-//                final String result = data.getStringExtra(EditProductActivity.EXTRA_DATA_EDIT_PRODUCT);
-//                Toast.makeText(getContext(), "check:", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
 
     @Override
     public void onResume() {

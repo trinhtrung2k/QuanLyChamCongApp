@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.trinhtrung.quanlychamcong.MainActivity;
 import com.trinhtrung.quanlychamcong.R;
 import com.trinhtrung.quanlychamcong.models.UserModel;
 
@@ -31,6 +32,7 @@ import com.trinhtrung.quanlychamcong.models.UserModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
+
     CircleImageView profileImg;
     EditText name, email, number, address;
     Button update;
@@ -53,20 +55,6 @@ public class ProfileFragment extends Fragment {
         address = view.findViewById(R.id.profile_address);
         update = view.findViewById(R.id.update);
 
-        db.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        UserModel userModel = snapshot.getValue(UserModel.class);
-
-                       Glide.with(getContext()).load(userModel.getProfileImg()).into(profileImg);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
 
         profileImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +69,20 @@ public class ProfileFragment extends Fragment {
 
             }
         });
+
+        db.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        UserModel userModel = snapshot.getValue(UserModel.class);
+                        Glide.with(getContext()).load(userModel.getProfileImg()).error(R.drawable.profile).into(profileImg);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
         update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,27 +100,35 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data.getData() != null){
+        if (requestCode == 24 && data != null && data.getData() != null ){
+       // if (data.getData() != null){
             Uri profileUri = data.getData();
-            profileImg.setImageURI(profileUri);
+            try {
+                profileImg.setImageURI(profileUri);
 
-            final StorageReference reference = storage.getReference().child("profile_picture")
-                    .child(FirebaseAuth.getInstance().getUid());
-            reference.putFile(profileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
-                    reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                          db.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
-                                  .child("profileImg").setValue(uri.toString());
-                            Toast.makeText(getContext(), "Profile Picture Uploaded", Toast.LENGTH_SHORT).show();
+                final StorageReference reference = storage.getReference().child("profile_picture")
+                        .child(FirebaseAuth.getInstance().getUid());
+                reference.putFile(profileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
+                        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                db.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
+                                        .child("profileImg").setValue(uri.toString());
+                                Toast.makeText(getContext(), "Profile Picture Uploaded", Toast.LENGTH_SHORT).show();
 
-                        }
-                    });
-                }
-            });
+                            }
+                        });
+                    }
+                });
+
+            }catch (Exception e){
+                Toast.makeText(getContext(), "Profile Picture Uploaded Faild", Toast.LENGTH_SHORT).show();
+
+            }
+
         }
     }
 }

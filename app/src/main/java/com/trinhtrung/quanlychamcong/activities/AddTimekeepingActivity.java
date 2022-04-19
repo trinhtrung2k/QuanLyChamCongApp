@@ -153,6 +153,7 @@ public class AddTimekeepingActivity extends AppCompatActivity {
 
         QLChamCongDataBase db = new QLChamCongDataBase(getApplicationContext());
         try {
+
             TimekeepingModel timekeepingModel = new TimekeepingModel();
             timekeepingModel.setMACC(addMaCC.getText().toString());
             timekeepingModel.setNGAYCC(addNgayCC.getText().toString());
@@ -220,7 +221,8 @@ private void setEventSpinner() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             strSelectMacn = spTkq.getSelectedItem().toString();
-            Toast.makeText(AddTimekeepingActivity.this, "bạn chọn: " + dataStrings.get(position), Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddTimekeepingActivity.this, "bạn chọn: " +
+                    dataStrings.get(position), Toast.LENGTH_SHORT).show();
         }
 
         @Override

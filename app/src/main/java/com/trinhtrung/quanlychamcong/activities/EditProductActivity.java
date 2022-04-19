@@ -54,10 +54,9 @@ public class EditProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_product);
-        Intent intent = getIntent();
-        ProductModel productModel = (ProductModel) intent.getSerializableExtra("dataSanPham");
+
         initUi();
-        setData(productModel);
+        setData();
         setEvent();
 
 
@@ -121,7 +120,9 @@ public class EditProductActivity extends AppCompatActivity {
 
     }
 
-    private void setData(ProductModel productModel) {
+    private void setData() {
+        Intent intent = getIntent();
+        ProductModel productModel = (ProductModel) intent.getSerializableExtra("dataSanPham");
         tvMaSP.setText(productModel.getMASP());
         edtTenSP.setText(productModel.getTENSP());
         edtDonGia.setText(String.valueOf(productModel.getDONGIA()));

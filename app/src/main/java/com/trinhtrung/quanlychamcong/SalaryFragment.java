@@ -48,6 +48,7 @@ public class SalaryFragment extends Fragment {
     private List<SalaryModel> salaryModelList;
     private SalaryAdapter salaryAdapter;
     private RecyclerView recyclerView;
+    private   EditText edt_search_salary;
     ScrollView scrollView_salary;
     ProgressBar progressBar_salary;
     private QLChamCongDataBase db ;
@@ -61,7 +62,13 @@ public class SalaryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_salary, container, false);
         db = new QLChamCongDataBase(getActivity());
-        EditText edt_search_salary = view.findViewById(R.id.edt_search_salary);
+        initUi(view);
+        setEvent();
+        return view;
+    }
+
+    private void setEvent() {
+
         edt_search_salary.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -79,18 +86,25 @@ public class SalaryFragment extends Fragment {
 
             }
         });
-        scrollView_salary = view.findViewById(R.id.scroll_view_salary);
-        progressBar_salary = view.findViewById(R.id.progressbar_salary);
         progressBar_salary.setVisibility(View.VISIBLE);
         scrollView_salary.setVisibility(View.GONE);
-        recyclerView = view.findViewById(R.id.salary_rec);
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         salaryModelList = new ArrayList<>();
         salaryAdapter = new SalaryAdapter(SalaryFragment.this,salaryModelList);
         recyclerView.setAdapter(salaryAdapter);
-        getSalary();
-        return view;
+        getSalary(salaryModelList);
+
     }
+
+    private void initUi(View view) {
+        edt_search_salary = view.findViewById(R.id.edt_search_salary);
+        scrollView_salary = view.findViewById(R.id.scroll_view_salary);
+        progressBar_salary = view.findViewById(R.id.progressbar_salary);
+        recyclerView = view.findViewById(R.id.salary_rec);
+    }
+
     private void filter(String text) {
         ArrayList<SalaryModel> salaryModels = new ArrayList<>();
         for (SalaryModel item:salaryModelList)
@@ -106,8 +120,10 @@ public class SalaryFragment extends Fragment {
 
 
 
-    private void getSalary() {
-        Cursor dataSalary = db.GetData("SELECT CHAMCONG.MACC, CHAMCONG.NGAYCC, SANPHAM.MASP, SANPHAM.TENSP, CT_CHAMCONG.SOTP, CT_CHAMCONG.SOPP, SANPHAM.DONGIA " +
+    private void getSalary(List<SalaryModel> salaryModelList) {
+
+        db.getSalaryDB(salaryModelList);
+     /*   Cursor dataSalary = db.GetData("SELECT CHAMCONG.MACC, CHAMCONG.NGAYCC, SANPHAM.MASP, SANPHAM.TENSP, CT_CHAMCONG.SOTP, CT_CHAMCONG.SOPP, SANPHAM.DONGIA " +
                 "FROM CHAMCONG INNER JOIN CT_CHAMCONG ON CT_CHAMCONG.MACC = CHAMCONG.MACC INNER JOIN SANPHAM ON CT_CHAMCONG.MASP = SANPHAM.MASP  ORDER BY CHAMCONG.MACC ASC");
         salaryModelList.clear();
         while (dataSalary.moveToNext()){
@@ -119,7 +135,7 @@ public class SalaryFragment extends Fragment {
             int sopp = dataSalary.getInt(5);
             int dongia = dataSalary.getInt(6);
             salaryModelList.add(new SalaryModel(macc,ngaycc,masp,tensp,sotp,sopp,dongia));
-        }
+        }*/
 
         salaryAdapter.notifyDataSetChanged();
         progressBar_salary.setVisibility(View.GONE);

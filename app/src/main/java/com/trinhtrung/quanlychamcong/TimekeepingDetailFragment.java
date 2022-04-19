@@ -58,6 +58,7 @@ public class TimekeepingDetailFragment extends Fragment {
     ProgressBar progressBar_ctcc;
     private ImageView img_add_ctcc;
     private QLChamCongDataBase db ;
+    private  EditText edt_search_ctcc;
 
     private static final int REQUEST_CODE_TKPDT = 4;
 
@@ -74,17 +75,30 @@ public class TimekeepingDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_timekeeping_detail, container, false);
         db = new QLChamCongDataBase(getActivity());
+        initUi(view);
+        setEvent();
+        return view;
+    }
+
+    private void initUi(View view) {
         img_add_ctcc= view.findViewById(R.id.img_add_ctcc);
+         edt_search_ctcc = view.findViewById(R.id.edt_search_ctcc);
+        scrollView_ctcc = view.findViewById(R.id.scroll_view_ctcc);
+        progressBar_ctcc = view.findViewById(R.id.progressbar_ctcc);
+        recyclerView = view.findViewById(R.id.timekeepingDetail_rec);
+    }
+
+    private void setEvent() {
         img_add_ctcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(getActivity(), AddTimekeepingDetailActivity.class);
                 startActivity(intent);
-              //  startActivityForResult(intent, REQUEST_CODE_TKPDT);
+                //  startActivityForResult(intent, REQUEST_CODE_TKPDT);
             }
         });
-        EditText edt_search_ctcc = view.findViewById(R.id.edt_search_ctcc);
+
         edt_search_ctcc.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -102,19 +116,19 @@ public class TimekeepingDetailFragment extends Fragment {
 
             }
         });
-        scrollView_ctcc = view.findViewById(R.id.scroll_view_ctcc);
-        progressBar_ctcc = view.findViewById(R.id.progressbar_ctcc);
+
         progressBar_ctcc.setVisibility(View.VISIBLE);
         scrollView_ctcc.setVisibility(View.GONE);
-        recyclerView = view.findViewById(R.id.timekeepingDetail_rec);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         modelList = new ArrayList<>();
         adapter = new TimekeepingDetailAdapter(TimekeepingDetailFragment.this,modelList);
         recyclerView.setAdapter(adapter);
 
         getAllTimekeepingDetail();
-        return view;
+
     }
+
     private void filter(String text) {
         ArrayList<TimekeepingDetailModel> timekeepingDetailModels = new ArrayList<>();
         for (TimekeepingDetailModel item:modelList)

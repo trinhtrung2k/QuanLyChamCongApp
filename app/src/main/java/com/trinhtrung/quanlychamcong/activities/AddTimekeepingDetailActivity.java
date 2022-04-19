@@ -110,6 +110,8 @@ public class AddTimekeepingDetailActivity extends AppCompatActivity {
     private void insertCTCC(){
         QLChamCongDataBase db = new QLChamCongDataBase(getApplicationContext());
         try {
+
+
             TimekeepingDetailModel model = new TimekeepingDetailModel();
 
             model.setMACC(strSelectMaCC);

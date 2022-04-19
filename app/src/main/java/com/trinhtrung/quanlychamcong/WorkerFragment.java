@@ -32,6 +32,7 @@ public class WorkerFragment extends Fragment {
     private List<WorkerModel> workerModelList;
     private WorkerAdapter workerAdapter;
     private RecyclerView recyclerView;
+    private  EditText edt_search_cn;
     ScrollView scrollView;
     ProgressBar progressBar;
     private ImageView img_add_cn;
@@ -48,66 +49,71 @@ public class WorkerFragment extends Fragment {
         // Inflate the layout for this fragment
            View view = inflater.inflate(R.layout.fragment_worker, container, false);
            db = new QLChamCongDataBase(getActivity());
-           img_add_cn= view.findViewById(R.id.img_add_cn);
-           img_add_cn.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   startActivity(new Intent(getActivity(), AddWorkerActivity.class));
-               }
-           });
-           EditText edt_search_cn = view.findViewById(R.id.edt_search_cn);
-           edt_search_cn.addTextChangedListener(new TextWatcher() {
-               @Override
-               public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+           initUi(view);
 
-               }
-
-               @Override
-               public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-               }
-
-               @Override
-               public void afterTextChanged(Editable s) {
-                   filter(s.toString());
-
-               }
-           });
-
-
-
-           recyclerView = view.findViewById(R.id.worker_rec);
-           //table layout
-           recyclerView.setHasFixedSize(true);
-           //
-
-
-
-         //  recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-           LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),
-                   LinearLayoutManager.VERTICAL, false);
-
-           DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                   layoutManager.getOrientation());
-           recyclerView.addItemDecoration(dividerItemDecoration);
-           recyclerView.setLayoutManager(layoutManager);
-           workerModelList = new ArrayList<>();
-           workerAdapter = new WorkerAdapter(WorkerFragment.this,workerModelList);
-           recyclerView.setAdapter(workerAdapter);
-           scrollView = view.findViewById(R.id.scroll_view);
-           progressBar = view.findViewById(R.id.progressbar);
-           progressBar.setVisibility(View.VISIBLE);
-           scrollView.setVisibility(View.GONE);
-           GetAllWorker();
+           setEvent();
 
         return view ;
     }
 
-    private void GetAllWorker() {
-//        workerModelList.clear();
-//        workerModelList = db.getAllWorker();
-//        workerAdapter.notifyDataSetChanged();
+    private void initUi(View view) {
+        img_add_cn= view.findViewById(R.id.img_add_cn);
+         edt_search_cn = view.findViewById(R.id.edt_search_cn);
+        recyclerView = view.findViewById(R.id.worker_rec);
+        scrollView = view.findViewById(R.id.scroll_view);
+        progressBar = view.findViewById(R.id.progressbar);
+    }
 
+    private void setEvent() {
+
+        img_add_cn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AddWorkerActivity.class));
+            }
+        });
+
+        edt_search_cn.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+
+            }
+        });
+
+
+        //table layout
+        recyclerView.setHasFixedSize(true);
+        //
+
+        //  recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),
+                LinearLayoutManager.VERTICAL, false);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                layoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerView.setLayoutManager(layoutManager);
+        workerModelList = new ArrayList<>();
+        workerAdapter = new WorkerAdapter(WorkerFragment.this,workerModelList);
+        recyclerView.setAdapter(workerAdapter);
+
+        progressBar.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.GONE);
+
+        GetAllWorker();
+    }
+
+    private void GetAllWorker() {
         Cursor dataWorker = db.GetData("SELECT * FROM CONGNHAN");
         workerModelList.clear();
         while (dataWorker.moveToNext()){

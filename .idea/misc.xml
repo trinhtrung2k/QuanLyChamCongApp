@@ -71,8 +71,8 @@
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/activity_registration.xml" value="0.25" />
-        <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/activity_salary_detail.xml" value="0.4753787878787879" />
-        <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/activity_send_email.xml" value="0.20416666666666666" />
+        <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/activity_salary_detail.xml" value="0.33" />
+        <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/activity_send_email.xml" value="0.33" />
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/app_bar_main.xml" value="0.20416666666666666" />
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/content_main.xml" value="0.20416666666666666" />
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/fragment_attendance_report.xml" value="0.20416666666666666" />
@@ -81,6 +81,7 @@
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/fragment_product.xml" value="0.25" />
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/fragment_salary.xml" value="0.20416666666666666" />
+        <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/fragment_slideshow.xml" value="0.36666666666666664" />
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/fragment_timekeeping.xml" value="0.20416666666666666" />
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/fragment_timekeeping_detail.xml" value="0.25" />
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/fragment_worker.xml" value="0.25" />
@@ -93,7 +94,8 @@
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/timekeeing_detail_item.xml" value="0.22" />
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/timekeeping_item.xml" value="0.20416666666666666" />
         <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/layout/worker_item.xml" value="0.36666666666666664" />
-        <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/menu/activity_main_drawer.xml" value="0.25" />
+        <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/menu/activity_main_drawer.xml" value="0.5" />
+        <entry key="..\:/NAM 4/ANDROID/QuanLyChamCong/app/src/main/res/menu/main.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

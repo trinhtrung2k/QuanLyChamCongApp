@@ -33,10 +33,9 @@ public class EditWorkerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_worker);
-        Intent intent = getIntent();
-        WorkerModel workerModel = (WorkerModel) intent.getSerializableExtra("dataCongNhan");
+
         initUi();
-        setData(workerModel);
+        setData();
         setEvent();
 
     }
@@ -90,7 +89,9 @@ public class EditWorkerActivity extends AppCompatActivity {
 
     }
 
-    private void setData(WorkerModel workerModel) {
+    private void setData() {
+        Intent intent = getIntent();
+        WorkerModel workerModel = (WorkerModel) intent.getSerializableExtra("dataCongNhan");
         edtMaCN.setText(workerModel.getMACN());
         edtHoCN.setText(workerModel.getHOCN());
         edtTenCN.setText(workerModel.getTENCN());

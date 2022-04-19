@@ -10,11 +10,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.trinhtrung.quanlychamcong.models.ProductModel;
+import com.trinhtrung.quanlychamcong.models.SalaryModel;
 import com.trinhtrung.quanlychamcong.models.TimekeepingDetailModel;
 import com.trinhtrung.quanlychamcong.models.TimekeepingModel;
 import com.trinhtrung.quanlychamcong.models.WorkerModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class QLChamCongDataBase extends SQLiteOpenHelper {
     private static String DB_NAME= "QuanLyChamCong.db";
@@ -149,6 +151,8 @@ public class QLChamCongDataBase extends SQLiteOpenHelper {
     }
 
 
+
+
     // TIMEKEEPING
     public void AddTimekeeping(TimekeepingModel timekeepingModel){
         SQLiteDatabase db = getWritableDatabase();
@@ -197,5 +201,29 @@ public class QLChamCongDataBase extends SQLiteOpenHelper {
         SQLiteDatabase database = getReadableDatabase();
         return  database.rawQuery(sql,null);
     }
+   /* public void checkDuplicateTimekeepingDetail(TimekeepingDetailModel timekeepingDetailModel,String MACC, String MASP){
+        Cursor data = GetData("SELECT MACC FROM CT_CHAMCONG WHERE MACC = "+ MACC + " AND MASP =" + MASP+"");
 
+        String check = data.getString(0);
+        if (!check.equals(MACC)){
+            AddTimekeepingDetail(timekeepingDetailModel);
+        }
+    }
+*/
+    public void getSalaryDB(List<SalaryModel> salaryModelList){
+
+        Cursor dataSalary = GetData("SELECT CHAMCONG.MACC, CHAMCONG.NGAYCC, SANPHAM.MASP, SANPHAM.TENSP, CT_CHAMCONG.SOTP, CT_CHAMCONG.SOPP, SANPHAM.DONGIA " +
+                "FROM CHAMCONG INNER JOIN CT_CHAMCONG ON CT_CHAMCONG.MACC = CHAMCONG.MACC INNER JOIN SANPHAM ON CT_CHAMCONG.MASP = SANPHAM.MASP  ORDER BY CHAMCONG.MACC ASC");
+        salaryModelList.clear();
+        while (dataSalary.moveToNext()){
+            String macc = dataSalary.getString(0);
+            String ngaycc = dataSalary.getString(1);
+            String masp = dataSalary.getString(2);
+            String tensp = dataSalary.getString(3);
+            int sotp = dataSalary.getInt(4);
+            int sopp = dataSalary.getInt(5);
+            int dongia = dataSalary.getInt(6);
+            salaryModelList.add(new SalaryModel(macc,ngaycc,masp,tensp,sotp,sopp,dongia));
+        }
+    }
 }

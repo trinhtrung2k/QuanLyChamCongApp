@@ -33,10 +33,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         auth = FirebaseAuth.getInstance();
-        progressBar = findViewById(R.id.progressbar);
-        progressBar.setVisibility(View.GONE);
+
         initUi();
 
+        setEvent();
+
+
+    }
+
+    private void setEvent() {
+        progressBar.setVisibility(View.GONE);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password_login);
         signUp = findViewById(R.id.sign_up);
         forgotPassword = findViewById(R.id.forgot_password);
+        progressBar = findViewById(R.id.progressbar);
     }
 
     private void loginUser() {

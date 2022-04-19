@@ -49,10 +49,9 @@ public class  EditTimekeepingDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_timekeeping_detail);
-        Intent intent = getIntent();
-        TimekeepingDetailModel model = (TimekeepingDetailModel) intent.getSerializableExtra("dataCTCC");
+
         initUi();
-        setData(model);
+        setData();
         setEvent();
 
 
@@ -107,8 +106,9 @@ public class  EditTimekeepingDetailActivity extends AppCompatActivity {
 
     }
 
-    private void setData(TimekeepingDetailModel model) {
-
+    private void setData() {
+        Intent intent = getIntent();
+        TimekeepingDetailModel model = (TimekeepingDetailModel) intent.getSerializableExtra("dataCTCC");
         tvMaCC.setText(model.getMACC());
         tvMaSP.setText(model.getMASP());
         edtSoTP.setText(String.valueOf(model.getSOTP()));

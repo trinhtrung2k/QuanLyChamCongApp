@@ -31,11 +31,7 @@ public class RegistrationActivity extends AppCompatActivity {
     TextView signIn;
 
     FirebaseAuth auth;
-   // DatabaseReference database;
 
-
-//   FirebaseDatabase database;
-//    DatabaseReference dbRef;
 
     private DatabaseReference mDatabase;
     ProgressBar progressBar;
@@ -46,9 +42,13 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        progressBar = findViewById(R.id.progressbar);
-        progressBar.setVisibility(View.GONE);
         initUi();
+        setEvent();
+
+    }
+
+    private void setEvent() {
+        progressBar.setVisibility(View.GONE);
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +61,7 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createUser();
-              //  progressBar.setVisibility(View.VISIBLE);
+                //  progressBar.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -73,7 +73,7 @@ public class RegistrationActivity extends AppCompatActivity {
         email = findViewById(R.id.email_reg);
         password = findViewById(R.id.password_reg);
         signIn = findViewById(R.id.sign_in);
-
+        progressBar = findViewById(R.id.progressbar);
     }
 
     private void createUser() {
